@@ -15,21 +15,29 @@ class MainActivity : AppCompatActivity(), MainView {
         vb = ActivityMainBinding.inflate(layoutInflater)
         setContentView(vb?.root)
 
-        val listener = View.OnClickListener {
-            presenter.counterClick(it.id)
-        }
-
-        vb?.btnCounter1?.setOnClickListener(listener)
-        vb?.btnCounter2?.setOnClickListener(listener)
-        vb?.btnCounter3?.setOnClickListener(listener)
+        vb?.btnCounter1?.setOnClickListener { presenter.counterClick(CounterIndices.INDEX_OF_COUNTER_ONE) }
+        vb?.btnCounter2?.setOnClickListener { presenter.counterClick(CounterIndices.INDEX_OF_COUNTER_TWO) }
+        vb?.btnCounter3?.setOnClickListener { presenter.counterClick(CounterIndices.INDEX_OF_COUNTER_THREE) }
 
     }
 
-    override fun setButtonText(index: Int, text: String) {
-        when(index){
-            0 -> vb?.btnCounter1?.text = text
-            1 -> vb?.btnCounter2?.text = text
-            2 -> vb?.btnCounter3?.text = text
+    override fun setButtonOneText(text: String) {
+        setButtonText(CounterIndices.INDEX_OF_COUNTER_ONE, text)
+    }
+
+    override fun setButtonTwoText(text: String) {
+        setButtonText(CounterIndices.INDEX_OF_COUNTER_TWO, text)
+    }
+
+    override fun setButtonThreeText(text: String) {
+        setButtonText(CounterIndices.INDEX_OF_COUNTER_THREE, text)
+    }
+
+    private fun setButtonText(index: CounterIndices, text: String) {
+        when(index) {
+            CounterIndices.INDEX_OF_COUNTER_ONE -> vb?.btnCounter1?.text = text
+            CounterIndices.INDEX_OF_COUNTER_TWO -> vb?.btnCounter2?.text = text
+            CounterIndices.INDEX_OF_COUNTER_THREE -> vb?.btnCounter3?.text = text
         }
     }
 }
